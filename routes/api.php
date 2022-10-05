@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+
+//api routes 
+Route::prefix('/user/v1')->group(function(){
+    Route::post('/login', [LoginController::class, 'login']);
+    Route::group(['middleware' => ['auth:api']], function () {
+        Route::post('/register', [RegisterController::class, 'register']);
+    });
+    
 });
