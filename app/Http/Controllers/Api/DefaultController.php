@@ -8,4 +8,7 @@ use Illuminate\Http\Request;
 class DefaultController extends Controller
 {
     //
+    public function test(){
+        return json_encode("The test");
+    }    
 }
