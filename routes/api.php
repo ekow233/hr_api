@@ -30,6 +30,7 @@ Route::prefix('/user/v1')->group(function(){
         Route::post('/register', [RegisterController::class, 'register']);
         Route::get('/get-modules', [ModulesController::class, 'gets']);
         Route::get('/get-module/{id}', [ModulesController::class, 'get']);
+        
     });
     
 });
