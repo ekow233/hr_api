@@ -19,6 +19,23 @@ class LoginController extends Controller
 
         //if login attempt is successful
         if(Auth::attempt($login)){
+
+            //if the account is authenticated check to see if the account is
+            //inactive log the user out
+            if(Auth::user()->status == 0){
+                //get the user token
+                $user = Auth::user()->token();
+
+                //if user has not logged in before return response
+                if($user == null){
+                    return response()->json(['response_code'=>'401','message'=>'User has been deactivated']);
+                }
+
+                //if user has logged in before revoke the token and return response
+                $user->revoke();
+                return response()->json(['response_code'=>'401','message'=>'User has been deactivated']);
+            }
+
             //return user type
             $token = Auth::user()->createToken('AuthToken')->accessToken;
             if (auth()->user()->hasRole('Admin')) {
@@ -37,4 +54,5 @@ class LoginController extends Controller
         }
 
     }
+
 }

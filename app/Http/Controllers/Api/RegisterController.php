@@ -3,33 +3,26 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\User;
+use App\Helpers\AppHelper;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-use Spatie\Permission\Models\Role;
 
 class RegisterController extends Controller
 {
+
+
     //Register function to take care of user registration from api
     public function register(Request $request){
 
-        // return("creating user");
-
-        //validate user creation details
-        // $validator = Validator::make($request->all(), [
-        //     'username' => 'required',
-        //     'email' => 'required|email',
-        //     'password' => 'required',
-        //     'employee' => 'required'
-        // ]);
-
-        // $validator = $request->validate([
-        //     'username' => 'required',
-        //     'email' => 'required|email|unique:users,email',
-        //     'password' => 'required',
-        //     'employee' => 'required|unique:users,employee',
-        //     'role_id' => 'required'
-        // ]);
+        //check if the user has permission to create users
+        $userPerm = AppHelper::instance()->checkCreateUserPerm($request->posted_by);
+        
+        //if user does not have the permission {CREATE USERS} return 401
+        if(!$userPerm){
+            return response()->json(['response_code'=>'401','message'=>'user action denied']);
+        }
 
         $validator = Validator::make($request->all(),[
             'username' => 'required',
@@ -62,4 +55,6 @@ class RegisterController extends Controller
             return response()->json(['response_code'=>'200','message'=>'user created successfully']);
         }
     }
+
+
 }
