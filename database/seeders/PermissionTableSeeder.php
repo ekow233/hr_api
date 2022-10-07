@@ -21,7 +21,11 @@ class PermissionTableSeeder extends Seeder
             'create',
             'delete',
             'approval',
-            'create users',
+            'create user',
+            'deactivate user',
+            'activate user',
+            'view users',
+            'view employees',
 
         ];
 

@@ -28,6 +28,7 @@ class UserTableSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => bcrypt('admin1234'),
             'employee' => '147',
+            'posted_by' => '1'
         ]);
 
         $user->assignRole([$admin->id]);
@@ -42,6 +43,7 @@ class UserTableSeeder extends Seeder
             'email' => 'manager@admin.com',
             'password' => bcrypt('admin1234'),
             'employee' => '148',
+            'posted_by' => '1'
         ]);
 
         $user->assignRole([$admin->id]);
@@ -57,6 +59,7 @@ class UserTableSeeder extends Seeder
             'email' => 'employee@admin.com',
             'password' => bcrypt('admin1234'),
             'employee' => '149',
+            'posted_by' => '1'
         ]);
 
         $user->assignRole([$admin->id]);

@@ -18,10 +18,10 @@ class RegisterController extends Controller
 
         //check if the user has permission to create users
         $userPerm = AppHelper::instance()->checkCreateUserPerm($request->posted_by);
-        
+
         //if user does not have the permission {CREATE USERS} return 401
         if(!$userPerm){
-            return response()->json(['response_code'=>'401','message'=>'user action denied']);
+            return response()->json(['response_code'=>'401','message'=>'user does not have the required permission']);
         }
 
         $validator = Validator::make($request->all(),[
