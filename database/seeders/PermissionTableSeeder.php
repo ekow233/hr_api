@@ -26,6 +26,11 @@ class PermissionTableSeeder extends Seeder
             'activate user',
             'view users',
             'view employees',
+            'create employee',
+            'edit employee',
+            'suspend employee',
+            'terminate employee',
+            'approve employee',
 
         ];
 

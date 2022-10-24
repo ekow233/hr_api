@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Api\LogoutController;
 use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\Api\EmployeesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,11 +30,19 @@ Route::prefix('/user/v1')->group(function(){
 
     //all routes are protected by the api authentication
     Route::group(['middleware' => ['auth:api']], function () {
+
+        //user routes
         Route::post('/register', [RegisterController::class, 'register']);
         Route::get('/users', [UsersController::class, 'getUsers']);
         Route::post('/deactivate-user', [UsersController::class, 'deactivateUser']);
         Route::post('/activate-user', [UsersController::class, 'activateUser']);
         Route::post('/logout', [LogoutController::class, 'logout']);
+
+        //employee routes
+        Route::get('/employees/{id}', [EmployeesController::class, 'getEmployees']);
+        Route::post('/create-employees', [EmployeesController::class, 'createEmployee']);
+        
+        
              
     });
     
