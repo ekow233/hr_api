@@ -19,7 +19,7 @@ class EmployeesController extends Controller
         
         //if user does not have the permission {VIEW USERS} return 401
         if(!$userPerm){
-            return response()->json(['response_code'=>'401','message'=>'user does not have the required permission']);
+            return response()->json(['response_code1'=>'401','message'=>'user does not have the required permission']);
         }
 
         $employees = Employee::all();
