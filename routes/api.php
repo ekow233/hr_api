@@ -4,7 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\ModulesController;
+use App\Http\Controllers\Api\UsersController;
+use App\Http\Controllers\Api\LogoutController;
 use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\Api\EmployeesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,12 +28,23 @@ use App\Http\Controllers\Api\RegisterController;
 //api routes 
 Route::prefix('/user/v1')->group(function(){
     Route::post('/login', [LoginController::class, 'login']);
-    
+
+    //all routes are protected by the api authentication
     Route::group(['middleware' => ['auth:api']], function () {
+
+        //user routes
         Route::post('/register', [RegisterController::class, 'register']);
-        Route::get('/get-modules', [ModulesController::class, 'gets']);
-        Route::get('/get-module/{id}', [ModulesController::class, 'get']);
+        Route::get('/users', [UsersController::class, 'getUsers']);
+        Route::post('/deactivate-user', [UsersController::class, 'deactivateUser']);
+        Route::post('/activate-user', [UsersController::class, 'activateUser']);
+        Route::post('/logout', [LogoutController::class, 'logout']);
+
+        //employee routes
+        Route::get('/employees/{id}', [EmployeesController::class, 'getEmployees']);
+        Route::post('/create-employees', [EmployeesController::class, 'createEmployee']);
         
+        
+             
     });
     
 });
