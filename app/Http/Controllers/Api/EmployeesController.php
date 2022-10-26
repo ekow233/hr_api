@@ -87,32 +87,7 @@ class EmployeesController extends Controller
             }else{
                 return response()->json(['response_code'=>'401','message'=>'Something went wrong, try again or contact admin']);
             }
-            // $employee = new Employee;
-
-            // $employee->employee_id = $request->employee_id;
-            // $employee->title = $request->title;
-            // $employee->first_name = $request->first_name;
-            // $employee->middle_name = $request->middle_name;
-            // $employee->last_name = $request->last_name;
-            // $employee->birthday = $birthday;
-            // $employee->bank_acc_no = $request->bank_acc_no;
-            // $employee->pay_grade = $request->pay_grade;
-            // $employee->notches = $request->notches;
-            // $employee->home_phone = $request->home_phone;
-            // $employee->mobile_phone = $request->mobile_phone;
-            // $employee->work_phone = $request->work_phone;
-            // $employee->work_email = $request->work_email;
-            // $employee->private_email = $request->private_email;
-            // $employee->recruitment_date = $recruitment;
-            // $employee->supervisor = $request->supervisor;
-            // $employee->indirect_supervisors = $request->indirect_supervisors;
-            // $employee->branch = $request->branch;
-
-            // $employee->save();
-
-
-            //return response
-            // return response()->json(['response_code'=>'200','message'=>'user created successfully']);
+           
         }
     }
 
