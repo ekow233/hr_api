@@ -26,7 +26,7 @@ use App\Http\Controllers\Api\EmployeesController;
 
 
 //api routes 
-Route::prefix('/user/v1')->group(function(){
+Route::prefix('/hr/v1')->group(function(){
     Route::post('/login', [LoginController::class, 'login']);
 
     //all routes are protected by the api authentication
