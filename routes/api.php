@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Api\LogoutController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\EmployeesController;
+use App\Http\Controllers\Api\MenusController\AdminMenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,12 @@ Route::prefix('/hr/v1')->group(function(){
         //employee routes
         Route::get('/employees/{id}', [EmployeesController::class, 'getEmployees']);
         Route::post('/create-employees', [EmployeesController::class, 'createEmployee']);
+        
+
+        //route group for admins
+        Route::group(['middleware' => ['role:Admin']], function () {
+            Route::get('/get-admin-menus', [AdminMenuController::class, 'AdminMenus']);
+         });
         
         
              
