@@ -37,17 +37,22 @@ class AdminMenuController extends Controller
         //holds all admin dashboard modules
         $admin_dashboard;
 
-        //get all modules that falls under the admin
-        foreach($dashboard as $dash){
+        //get the count of all dashboard
+        $dashboardCount = count($dashboard);
 
-            //get user_levels array for each module
-            $user_levels = json_decode($dash->user_levels);
-                    
-            //get all dashboard modules assigned to the admin
-            foreach($user_levels as $user_level){
-                if($user_level == 'Admin'){
-                    $admin_dashboard[] = $dash;
-                };
+        //get all modules that falls under the admin
+        if($dashboardCount >0){
+            foreach($dashboard as $dash){
+
+                //get user_levels array for each module
+                $user_levels = json_decode($dash->user_levels);
+                        
+                //get all dashboard modules assigned to the admin
+                foreach($user_levels as $user_level){
+                    if($user_level == 'Admin'){
+                        $admin_dashboard[] = $dash;
+                    };
+                }
             }
         }
 
