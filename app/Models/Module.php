@@ -11,17 +11,13 @@ class Module extends Model
 
     protected $table= "modules";
 
-    //method return all the modules stored in the database
-    public function getsModule(){
-        $modules = $this::all();
-        return $modules;
-    }
+    // protected $fillable = [
+    //     ''
+    // ];
 
-    //method returns module specified by the id
-    public function getModule($id){
-        $module = $this->where("id", $id)->first();
-        return $module;
-    }
+    protected $casts = [
+
+    ];
 
 
 }

@@ -14,16 +14,16 @@ class EmployeesController extends Controller
     //get all the employees
     public function getEmployees(Request $request){
 
-        //check if the user has permission to view users
-        $userPerm = AppHelper::instance()->checkViewEmployeesPerm($request->id);
-        
+        // //check if the user has permission to view users
+        // $userPerm = AppHelper::instance()->checkViewEmployeesPerm($request->id);
+
         //if user does not have the permission {VIEW USERS} return 401
-        if(!$userPerm){
-            return response()->json(['response_code1'=>'401','message'=>'user does not have the required permission']);
-        }
+        // if(!$userPerm){
+        //     return response()->json(['response_code1'=>'401','message'=>'user does not have the required permission']);
+        // }
 
         $employees = Employee::all();
-        return $employees;
+        return response()->json(['response_code'=>200, 'message'=>'data found', 'data'=>$employees]);
     }
 
     //create employees
@@ -33,7 +33,7 @@ class EmployeesController extends Controller
 
         //check if the user has permission to view users
         $userPerm = AppHelper::instance()->checkCreateEmployeePerm($request->posted_by);
-        
+
         //if user does not have the permission {VIEW USERS} return 401
         if(!$userPerm){
             return response()->json(['response_code'=>'401','message'=>'user does not have the required permission']);
@@ -66,7 +66,7 @@ class EmployeesController extends Controller
             // return response()->json(['response_code'=>'401','message'=>'user details validation failed'.$error_msg]);
         }else{
             //now create the user
-            
+
             //get the date objects
             $time = strtotime($request->birthday);
             $birthday = date('Y-m-d',$time);
@@ -87,12 +87,74 @@ class EmployeesController extends Controller
             }else{
                 return response()->json(['response_code'=>'401','message'=>'Something went wrong, try again or contact admin']);
             }
-           
+
         }
     }
 
     // update employee details
     public function updateEmployee(Request $request){
-        
+
+        //check if the user has permission to view users
+        // $userPerm = AppHelper::instance()->checkViewEmployeesPerm($request->id);
+
+        // //default data
+        // $data = null;
+
+        //if user does not have the permission {VIEW USERS} return 401
+        // if(!$userPerm){
+        //     return response()->json(['response_code'=>401,'message'=>'user does not have the required permission',$data]);
+        // }
+
+        //code to get employee details by id
+        // $employee = Employee::where('employee_id',$request->employee_id)->first();
+
+        //code to check if the model exists
+        $countEmployee = Employee::where('id',$request->id)->count();
+
+        $response = null;
+        if($countEmployee>0){
+            $employee = Employee::find($request->id);
+            $employee->employee_id = $request->employee_id;
+            $employee->title = $request->title;
+            $employee->first_name = $request->first_name;
+            $employee->middle_name = $request->middle_name;
+            $employee->last_name = $request->last_name;
+            $employee->birthday = $request->birthday;
+            $employee->bank_acc_no = $request->bank_acc_no;
+            $employee->pay_grade = $request->pay_grade;
+            $employee->notches = $request->notches;
+            $employee->home_phone = $request->home_phone;
+            $employee->mobile_phone = $request->mobile_phone;
+            $employee->work_phone = $request->work_phone;
+            $employee->work_email = $request->work_email;
+            $employee->private_email = $request->private_email;
+            $employee->recruitment_date = $request->recruitment_date;
+            $employee->supervisor = $request->supervisor;
+            $employee->indirect_supervisors = $request->indirect_supervisors;
+            $employee->branch = $request->branch;
+            $employee->updated_date = date("Y-m-d h:i:s");
+            $employee->save();
+                    $response = response()->json(['response_code' => 200, 'message' => 'update successful', 'data' => $employee]);
+        }else{
+                    $response = response()->json(['response_code'=>204,'message'=>'data not found', 'data'=>null]);
+        }
+
+        return $response;
+
+
+
     }
+
+        //method to find employee with an id
+        public function getEmployeeById(Request $request){
+            $employee = Employee::where('id', $request->id)->get();
+            $count = Employee::where('id', $request->id)->count();
+
+            if($count>0){
+                return response()->json(['response_code' => 200, 'message' => 'data found', 'data' => $employee]);
+            }else{
+                        return response()->json(['response_code' => 204, 'message' => 'data not found', 'data' => null]);
+            }
+
+        }
 }

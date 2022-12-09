@@ -25,7 +25,7 @@ use App\Http\Controllers\Api\EmployeesController;
 // });
 
 
-//api routes 
+//api routes
 Route::prefix('/hr/v1')->group(function(){
     Route::post('/login', [LoginController::class, 'login']);
 
@@ -40,11 +40,17 @@ Route::prefix('/hr/v1')->group(function(){
         Route::post('/logout', [LogoutController::class, 'logout']);
 
         //employee routes
-        Route::get('/employees/{id}', [EmployeesController::class, 'getEmployees']);
+        Route::get('/employees', [EmployeesController::class, 'getEmployees']);
         Route::post('/create-employees', [EmployeesController::class, 'createEmployee']);
-        
-        
-             
+        Route::get('/employees/{id}', [EmployeesController::class, 'getEmployeeById']);
+        Route::put('/employees/update/{id}', [EmployeesController::class, 'updateEmployee']);
+
+        //module routes
+        Route::get('/modules', [ModulesController::class, 'getModules']);
+        Route::get('/modules/{id}', [ModulesController::class, 'getModuleById']);
+        Route::get('/create-module', [ModulesController::class, 'addModule']);
+        // Route::post('/create-employees', [EmployeesController::class, 'createEmployee']);
+
     });
-    
+
 });

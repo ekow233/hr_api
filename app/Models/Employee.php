@@ -9,10 +9,12 @@ class Employee extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
             'employee_id',
-            'title', 
-            'first_name', 
+            'title',
+            'first_name',
             'middle_name',
             'last_name',
             'birthday',
@@ -27,7 +29,8 @@ class Employee extends Model
             'recruitment_date',
             'supervisor',
             'indirect_supervisors',
-            'branch'
+            'branch',
+            'updated_date'
     ];
 
     protected $casts = [
