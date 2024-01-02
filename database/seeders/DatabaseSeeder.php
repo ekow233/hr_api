@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\ApprovalsTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,8 +23,9 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            PermissionTableSeeder::class,
-            UserTableSeeder::class,      
+            // PermissionTableSeeder::class,
+            // UserTableSeeder::class, 
+            ApprovalsTableSeeder::class,      
         ]);
     }
 }

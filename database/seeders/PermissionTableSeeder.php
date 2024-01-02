@@ -31,6 +31,9 @@ class PermissionTableSeeder extends Seeder
             'suspend employee',
             'terminate employee',
             'approve employee',
+            'company-structure/add',
+            'company-structure/edit',
+            'company-structure/view'
 
         ];
 

@@ -77,7 +77,8 @@ class AdminMenuController extends Controller
                       'training menu' => $trainingMenu,
                       'travel management menu' =>$travelMgtMenu,
                       'imprest menu' =>$imprestMenu,
-                      'response_code'=>'200','message'=>'Admin menu'
+                      'response_code'=>'200',
+                      'message'=>'Admin menu'
                     ]
                 );
     }
